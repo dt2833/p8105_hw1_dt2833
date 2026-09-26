@@ -1,6 +1,8 @@
 ---
 title: "Hw01"
 output: html_document
+author: "Dominique Tzou"
+date: 2026-09-26
 ---
 ```{r}
 library(tidyverse)
@@ -12,20 +14,23 @@ library(tidyverse)
 ```{r}
 data("penguins", package = "palmerpenguins")
 penguins = janitor::clean_names(penguins)
-mean_flipper = mean(pull(penguins, flipper_length_mm))
 ```
 
-Here is a summary of the penguin dataset 
+## Summary of the penguin dataset and variables
 `r skimr::skim(penguins)`
 
-Variable names include `r names(penguins)`
 
-The size of the penguins dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+Some additional details
+* Variables: Variable names include `r names(penguins)`
 
-The mean flipper length is `r mean_flipper`
+* Years: The data spans from Year `r min(pull(penguins, year))` to `r max(pull(penguins, year))`
+
+* Size: The size of the penguins dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+
+* The mean flipper length is `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE ), digits = 2)` mm.
 
 
-Scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
+### Scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
 ```{r}
 
 ggplot(penguins, aes(x = bill_length_mm,  y = flipper_length_mm, color = species))+geom_point()
@@ -61,7 +66,8 @@ The mean for the character vector is `r mean_vec_char`. This does not works beca
 The mean for the factor vector is `r mean_vec_factor`. This does not works because it is a character/factor variable. 
 
 
-_Attempting to convert variables into numeric_
+
+## Attempting to convert variables into numeric
 
 ```{r}
 as.numeric(pull(prob2_df,norm_samp_pos))
