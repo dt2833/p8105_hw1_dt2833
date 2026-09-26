@@ -52,16 +52,24 @@ mean_vec_factor = mean(pull(prob2_df, vec_factor))
 ```
 
 The mean for the sample is `r mean_norm_samp`. This works because it is a numerical variable. 
+
 The mean for the logical vector indicating whether elements of the sample are greater than 0
 is `r mean_samp_pos`. This works because it is a numerical variable. 
 
 The mean for the character vector is `r mean_vec_char`. This does not works because it is a chracter variable. 
+
 The mean for the factor vector is `r mean_vec_factor`. This does not works because it is a character/factor variable. 
 
 
+_Attempting to convert variables into numeric_
 
+```{r}
+as.numeric(pull(prob2_df,norm_samp_pos))
+as.numeric(pull(prob2_df,vec_char))
+as.numeric(pull(prob2_df,vec_factor))
+```
 
-
+When applying the as.numeric function to the logical and factor variables, their output categories are converted/designated to numerical values, so that a mean can be taken. But when as.numeric function is applied to the character variable, it is unsuccessful, but of its unique character variables. A mean cannot be calculated.
 
 
 
