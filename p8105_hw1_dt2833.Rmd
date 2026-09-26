@@ -22,6 +22,7 @@ penguins = janitor::clean_names(penguins) #cleaning names
 
 
 Some additional details
+
 * Variables: Variable names include `r names(penguins)`
 
 * Years: The data spans from Year `r min(pull(penguins, year))` to `r max(pull(penguins, year))`
@@ -51,8 +52,8 @@ prob2_df = tibble(
   norm_samp_pos = norm_samp > 0, #a logical vector indicating whether elements of the sample are greater than 0
   vec_char = c("cake","cookies", "crepes", "croissants", "creampuff", "cannolli", "cheesecake", "cupcake", "crumble", "cobbler" ), #a character vector of length 10 desserts
   vec_factor = factor(c("good", "better", "best", "good", "better", "best", "good", "better", "best", "best")) #a factor vector of length 10, with 3 different factor “levels: good, better, best”
-
 )
+
 #taking the mean of each 4 variables
 mean_norm_samp = mean(pull(prob2_df, norm_samp))
 mean_samp_pos = mean(pull(prob2_df, norm_samp_pos))
@@ -84,7 +85,7 @@ as.numeric(pull(prob2_df,vec_factor))
 
 ```
 
-When applying the as.numeric function to the logical and factor variables, their output categories (often repeated in the dataframe) are converted/designated to numerical values, so that a mean can be taken. But when as.numeric function is applied to the character variable, it is unsuccessful, but of its unique character variables. A mean cannot be calculated.
+When applying the as.numeric function to the logical and factor variables, their output categories (often repeated in the dataframe) are converted/designated to numerical values, so that a mean can be taken. But when as.numeric function is applied to the character variable, it is unsuccessful, but of its unique character values. A mean cannot be calculated.
 
 
 
