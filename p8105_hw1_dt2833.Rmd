@@ -6,13 +6,13 @@ date: 2026-09-26
 ---
 
 ```{r}
-library(tidyverse) #loading in tidyverse
+library(tidyverse) #loading in tidyverse, to use the pull function later
 ```
 
 
 # Problem 1
 
-```{r}
+```{r penguins_dataset}
 data("penguins", package = "palmerpenguins") #Loading in penguins dataset
 penguins = janitor::clean_names(penguins) #cleaning names
 ```
@@ -32,7 +32,7 @@ Some additional details
 
 
 ### Scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
-```{r}
+```{r scatterplot}
 
 ggplot(penguins, aes(x = bill_length_mm,  y = flipper_length_mm, color = species))+geom_point()
 ggsave("hw01_scatterplot.png")
@@ -42,18 +42,18 @@ ggsave("hw01_scatterplot.png")
 # Problem 2
 
 Creating a dataframe
-```{r}
+```{r dateframe}
 # setting seed to ensure reproducibility
 set.seed(4321)
 
 prob2_df = tibble(
   norm_samp = rnorm(10),#a random sample of size 10 from a standard Normal distribution
   norm_samp_pos = norm_samp > 0, #a logical vector indicating whether elements of the sample are greater than 0
-  vec_char = c("cake","cookies", "crepes", "croissants", "creampuff", "cannolli", "cheesecake", "cupcake", "crumble", "cobbler" ), #a character vector of length 10
-  vec_factor = factor(c("good", "better", "best", "good", "better", "best", "good", "better", "best", "best")) #a factor vector of length 10, with 3 different factor “levels”
+  vec_char = c("cake","cookies", "crepes", "croissants", "creampuff", "cannolli", "cheesecake", "cupcake", "crumble", "cobbler" ), #a character vector of length 10 desserts
+  vec_factor = factor(c("good", "better", "best", "good", "better", "best", "good", "better", "best", "best")) #a factor vector of length 10, with 3 different factor “levels: good, better, best”
 
 )
-
+#taking the mean of each 4 variables
 mean_norm_samp = mean(pull(prob2_df, norm_samp))
 mean_samp_pos = mean(pull(prob2_df, norm_samp_pos))
 mean_vec_char = mean(pull(prob2_df, vec_char))
@@ -62,26 +62,29 @@ mean_vec_factor = mean(pull(prob2_df, vec_factor))
 
 ```
 
-The mean for the sample is `r mean_norm_samp`. This works because it is a numerical variable. 
+### Mean results of variables 
+
+The mean for the sample is `r round(mean_norm_samp, digits = 4)`. This works because it is a numerical variable. 
 
 The mean for the logical vector indicating whether elements of the sample are greater than 0
 is `r mean_samp_pos`. This works because it is a numerical variable. 
 
-The mean for the character vector is `r mean_vec_char`. This does not works because it is a chracter variable. 
+The mean for the character vector is `r mean_vec_char`. This does not works because it is a character variable. 
 
 The mean for the factor vector is `r mean_vec_factor`. This does not works because it is a character/factor variable. 
 
 
 
-## Attempting to convert variables into numeric
+### Attempting to convert character variables into numeric
 
-```{r}
+```{r , numeric_conversion, results = 'hide', warning = FALSE}
 as.numeric(pull(prob2_df,norm_samp_pos))
 as.numeric(pull(prob2_df,vec_char))
 as.numeric(pull(prob2_df,vec_factor))
+
 ```
 
-When applying the as.numeric function to the logical and factor variables, their output categories are converted/designated to numerical values, so that a mean can be taken. But when as.numeric function is applied to the character variable, it is unsuccessful, but of its unique character variables. A mean cannot be calculated.
+When applying the as.numeric function to the logical and factor variables, their output categories (often repeated in the dataframe) are converted/designated to numerical values, so that a mean can be taken. But when as.numeric function is applied to the character variable, it is unsuccessful, but of its unique character variables. A mean cannot be calculated.
 
 
 
