@@ -1,6 +1,6 @@
 ---
 title: "Hw01"
-output: html_document
+output: github_document
 author: "Dominique Tzou"
 date: 2026-09-26
 ---
@@ -42,7 +42,7 @@ ggsave("hw01_scatterplot.png")
 
 # Problem 2
 
-Creating a dataframe
+### Creating a dataframe
 ```{r dateframe}
 # setting seed to ensure reproducibility
 set.seed(4321)
@@ -51,7 +51,7 @@ prob2_df = tibble(
   norm_samp = rnorm(10),#a random sample of size 10 from a standard Normal distribution
   norm_samp_pos = norm_samp > 0, #a logical vector indicating whether elements of the sample are greater than 0
   vec_char = c("cake","cookies", "crepes", "croissants", "creampuff", "cannolli", "cheesecake", "cupcake", "crumble", "cobbler" ), #a character vector of length 10 desserts
-  vec_factor = factor(c("good", "better", "best", "good", "better", "best", "good", "better", "best", "best")) #a factor vector of length 10, with 3 different factor “levels: good, better, best”
+  vec_factor = factor(c("good", "better", "best", "good", "better", "best", "good", "better", "best", "best")) #a factor vector of length 10, with 3 different factor “levels": good, better, best
 )
 
 #taking the mean of each 4 variables
