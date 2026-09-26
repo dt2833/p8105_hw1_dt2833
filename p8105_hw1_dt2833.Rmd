@@ -12,7 +12,6 @@ library(tidyverse)
 ```{r}
 data("penguins", package = "palmerpenguins")
 litters_df = janitor::clean_names(penguins)
-mean(pull(penguins,flipper_length_mm ))
 ```
 
 Here is a summary of the penguin dataset 
@@ -23,5 +22,15 @@ Variable names include `r names(penguins)`
 The size of the penguins dataset includes `r nrow(penguins)` rows and `r ncol(penguins)` columns.
 
 The mean flipper length is `r mean(penguins,flipper_length_mm)`
+
+
+Scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
+```{r}
+
+ggplot(penguins, aes(x = bill_length_mm,  y = flipper_length_mm, color = species))+geom_point()
+ggsave("hw01_scatterplot.png")
+
+```
+
 
 
